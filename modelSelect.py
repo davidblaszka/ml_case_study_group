@@ -42,7 +42,7 @@ class ModelSelect(object):
 		return self.model.predict_proba(X)
 
 	def coeff(self):
-		pass
+		return self.model.coef_
 
-	def score(self, y_test):
-		pass
+	def score(self, X, y):
+		return self.model.score(X, y)
