@@ -1,12 +1,12 @@
-import numpy as np 
-import pandas as pd 
+import numpy as np
+import pandas as pd
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import StandardScaler
-
+from sklearn import metrics
 class ModelSelect(object):
 	def __init__(self, model, name_of_model):
 		'''
-		input: 
+		input:
 			- model - is sklearn model class
 			- name_of_model - name of model
 		'''
@@ -26,7 +26,7 @@ class ModelSelect(object):
 	def predict(self, X):
 		'''
 		input:
-			- X: dataframe 
+			- X: dataframe
 		returns:
 			- model predict: dataframe for model predictions
 		'''
@@ -35,7 +35,7 @@ class ModelSelect(object):
 	def predict_proba(self, X):
 		'''
 		input:
-			- X: dataframe 
+			- X: dataframe
 		returns:
 			- model predict probs: dataframe for model predictions probs
 		'''
@@ -46,3 +46,7 @@ class ModelSelect(object):
 
 	def score(self, X, y):
 		return self.model.score(X, y)
+
+	def cross_val(self, X, y, n_folds=3, scoring = 'accuracy'):
+		score = cross_val_score(self.model, X, y, cv= n_folds, scoring =scoring)
+		return np.mean(score)
